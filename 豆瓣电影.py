@@ -19,13 +19,18 @@ def parse_page(url):
         print(filmname)
         print(fileitem)
         print("  ")
+
+        with open("doubandianying.txt", "a") as f:
+            f.write(str(filmname)+'\n')
+        with open("doubandianying.txt", "a") as f:
+            f.write(str(fileitem)+'\n')
+        
         
     
     
 
 
-    with open("doubandianying", "wb") as f:
-        f.write(response.content)
+    
 
 
 def main():
