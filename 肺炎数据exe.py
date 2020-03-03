@@ -22,17 +22,37 @@ def parse_page(url):
     m=""
     d=""
     for i in range(provincelen):
+        if state['data'][i]['cities'] is None:
+            continue 
         citylen = len(state['data'][i]['cities'])
+        provincename = state['data'][i]['data']['provinceName']
+        confirmedCount = state['data'][i]['data']['confirmedCount']
+        curedCount = state['data'][i]['data']['curedCount'] 
+        deadCount = state['data'][i]['data']['deadCount'] 
+        p = str(provincename)+"  确诊病例"+str(confirmedCount)+"  已治愈"+str(curedCount)+"  死亡人数  "+str(deadCount)  #获取省份肺炎数据
+        m = m + p + '\n'
+
         for j in range(citylen):
             cityName = state['data'][i]['cities'][j]['cityName']
             diagnosed = state['data'][i]['cities'][j]['diagnosed']
             cured = state['data'][i]['cities'][j]['cured']
             died = state['data'][i]['cities'][j]['died']
             
-            s =str(cityName)+"  确诊病例"+str(diagnosed)+"  已治愈"+str(cured)+"  死亡人数  "+str(died)
+            s =str(cityName)+"  确诊病例"+str(diagnosed)+"  已治愈"+str(cured)+"  死亡人数  "+str(died) #获取城市肺炎数据
             m = m + s +'\n'
         d =d+m
-        content_text.SetValue(d)
+    
+    countrylen = len(state['country'])
+    c = 0
+    for c in range(countrylen):
+        countryname = state['country'][c]['provinceName']
+        diagnosed = state['country'][c]['diagnosed']
+        cured = state['country'][c]['cured']
+        died = state['country'][c]['died']
+        oc = str(countryname)+"  确诊病例"+str(diagnosed)+"  已治愈"+str(cured)+"  死亡人数  "+str(died) #获取国外肺炎数据
+        d = d + oc +'\n'
+    
+    content_text.SetValue(d)
           
         
  
